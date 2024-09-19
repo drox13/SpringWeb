@@ -1,5 +1,6 @@
 package com.dario.curso.sprintboot.webapp.sprintboot_web.models.dto;
 
+//
 public class ParamDto {
     private String message;
     private Integer code;
