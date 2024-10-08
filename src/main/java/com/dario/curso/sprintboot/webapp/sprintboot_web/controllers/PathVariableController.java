@@ -7,6 +7,7 @@ import com.dario.curso.sprintboot.webapp.sprintboot_web.models.User;
 import com.dario.curso.sprintboot.webapp.sprintboot_web.models.dto.ParamDto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -26,10 +27,16 @@ import org.springframework.web.bind.annotation.RequestBody;
         //private String message;
         
         @Value("${config.listOfValue}")
-        private String [] listOfValues;
+        private List<String> listOfValues;
         
         @Value("${config.code}")
         private Integer code;
+
+        @Value("#{ '${config.listOfValue}'.toUpperCase().split(',') }")
+        private List<String> valueList;
+
+        @Value("#{ '${config.listOfValue}'.toUpperCase() }")
+        private String valueString;
 
     @GetMapping("/baz/{message}") //Path variable
     public ParamDto baz(@PathVariable String message) {
@@ -60,6 +67,8 @@ import org.springframework.web.bind.annotation.RequestBody;
         json.put("code", code);
         json.put("message", message);
         json.put("listOfValues", listOfValues);
+        json.put("valueList", valueList);
+        json.put("valueString", valueString);
         return json;
     }
     
