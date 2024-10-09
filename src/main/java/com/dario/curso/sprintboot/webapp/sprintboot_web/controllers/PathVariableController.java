@@ -38,6 +38,15 @@ import org.springframework.web.bind.annotation.RequestBody;
         @Value("#{ '${config.listOfValue}'.toUpperCase() }")
         private String valueString;
 
+        @Value("#{ ${config.valuesMap} }")
+        private Map<String, Object> valuesMap;
+
+        @Value("#{ ${config.valuesMap}.product }")
+        private String product;
+
+        @Value("#{ ${config.valuesMap}.price }")
+        private Long price;
+
     @GetMapping("/baz/{message}") //Path variable
     public ParamDto baz(@PathVariable String message) {
         ParamDto param = new ParamDto();
@@ -69,7 +78,9 @@ import org.springframework.web.bind.annotation.RequestBody;
         json.put("listOfValues", listOfValues);
         json.put("valueList", valueList);
         json.put("valueString", valueString);
+        json.put("valuesMap", valuesMap);
+        json.put("product", product);
+        json.put("price", price);
         return json;
     }
-    
 }
