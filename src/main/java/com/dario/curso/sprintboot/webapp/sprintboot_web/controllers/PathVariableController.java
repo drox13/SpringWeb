@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +49,9 @@ import org.springframework.web.bind.annotation.RequestBody;
         @Value("#{ ${config.valuesMap}.price }")
         private Long price;
 
+        @Autowired
+        private Environment endEnvironment;
+
     @GetMapping("/baz/{message}") //Path variable
     public ParamDto baz(@PathVariable String message) {
         ParamDto param = new ParamDto();
@@ -75,6 +80,8 @@ import org.springframework.web.bind.annotation.RequestBody;
         json.put("username", username);
         json.put("code", code);
         json.put("message", message);
+        json.put("message2", endEnvironment.getProperty("config.message"));
+        json.put("code2", endEnvironment.getProperty("config.code", Long.class));
         json.put("listOfValues", listOfValues);
         json.put("valueList", valueList);
         json.put("valueString", valueString);
