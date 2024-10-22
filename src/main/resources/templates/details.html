@@ -13,5 +13,15 @@
         <li th:if="${user.address}" th:text=${user.address}></li> <!-- por defecto evalua que no sea null-->
         <li th:if="${user.address == null}" th:text="${'No tiene direccion'}"></li>
     </ul>
+    <a th:href="@{/list}">Ver Listado</a>
+    <a th:href="@{/api/params/foo?mensaje=hola que tal festival}">Ver mensaje</a>
+    <br>
+    <a th:href="@{/api/params/foo(mensaje='hola que tal festival')}">Ver mensaje forma 2</a><br>
+    <a th:href="@{/api/params/bar(text='hola que tal festival', code=123)}">Ver bar 2 params</a><br>
+
+    <!--Para path  VARIABLE-->
+    <a th:href="@{'/api/var/baz/' + ${title}}">Ver var path varible</a>
+    <a th:href="@{'/api/var/baz/jajajaj'}">Ver var path varible 2</a>
+
 </body>
 </html>
